@@ -1,5 +1,5 @@
 export default async function Boards() {
-  const boardRes = await fetch("http://127.0.0.1:8000/board");
+  const boardRes = await fetch("http://127.0.0.1:8000/board/");
   const boards: string[] = await boardRes.json();
   return (
     <main>
@@ -8,6 +8,7 @@ export default async function Boards() {
         {boards.map((board) => (
           <Board board={board} key={board} />
         ))}
+        <Board board={"new"} />
       </ul>
     </main>
   );
@@ -16,7 +17,7 @@ export default async function Boards() {
 function Board({ board }: { board: string }) {
   return (
     <li>
-      <a href={"/board/" + board}>{board}</a>
+      <a href={"/board/" + board}>{board === "new" ? "+" : board}</a>
     </li>
   );
 }
