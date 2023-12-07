@@ -7,7 +7,7 @@ export function generateMetadata({
   params: { board: string };
 }): Metadata {
   return {
-    title: board,
+    title: `Write new post to ${board}`,
   };
 }
 
@@ -17,11 +17,14 @@ export default async function NewPost({
   params: { board: string };
 }) {
   return (
-    <form action={postPost.bind(null, board)}>
-      <input type="text" name="subject" />
-      <textarea name="content" />
-      <button type="submit">Submit</button>
-    </form>
+    <main>
+      <h2>Write new post to {board}</h2>
+      <form action={postPost.bind(null, board)}>
+        <input type="text" name="subject" />
+        <textarea name="content" />
+        <button type="submit">Submit</button>
+      </form>
+    </main>
   );
 }
 
