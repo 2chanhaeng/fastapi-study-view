@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { Board } from "@/types/responce";
+import { getPostInitFromForm } from "@/utils/form";
 
 export const metadata: Metadata = {
   title: "Create new board",
@@ -22,17 +24,7 @@ export default async function NewBoard() {
 
 async function postBoard(formData: FormData) {
   "use server";
-  const post = {
-    subject: formData.get("subject") as string,
-    description: formData.get("description") as string,
-  };
-  const init = {
-    method: "POST",
-    body: JSON.stringify(post),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+  const init = getPostInitFromForm(formData);
   const res = await fetch(`http://127.0.0.1:8000/board/`, init);
   const { subject: board } = (await res.json()) as { subject: string };
   return redirect(`/board/${board}`);

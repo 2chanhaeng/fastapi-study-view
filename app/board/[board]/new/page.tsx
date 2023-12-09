@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { getPostInitFromForm } from "@/utils/form";
+import { Post } from "@/types/responce";
 
 export function generateMetadata({
   params: { board },
@@ -30,18 +32,8 @@ export default async function NewPost({
 
 async function postPost(board: string, formData: FormData) {
   "use server";
-  const post = {
-    subject: formData.get("subject") as string,
-    content: formData.get("content") as string,
-  };
-  const init = {
-    method: "POST",
-    body: JSON.stringify(post),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+  const init = getPostInitFromForm(formData);
   const res = await fetch(`http://127.0.0.1:8000/board/${board}`, init);
-  const { id } = (await res.json()) as { id: number };
+  const { id } = (await res.json()) as Post;
   return redirect(`/board/${board}/${id}`);
 }
