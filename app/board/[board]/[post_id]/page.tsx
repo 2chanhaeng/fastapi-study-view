@@ -1,5 +1,6 @@
 import { Post } from "@/types/responce";
 import { notFound } from "next/navigation";
+import { DeletePost as Delete } from "@/components/post/Delete";
 
 export default async function Board({
   params: { board, post_id },
@@ -15,6 +16,7 @@ export default async function Board({
     <div>
       <h2>{subject}</h2>
       <p>{content}</p>
+      <Delete board={board} post_id={post_id} />
     </div>
   );
 }
