@@ -8,7 +8,7 @@ export function generateMetadata({
   return { title: decodeURI(board) };
 }
 
-export default async function BoardLayout({
+export default function BoardLayout({
   children,
   params: { board },
 }: {
