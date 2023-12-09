@@ -18,7 +18,7 @@ export default async function NewPost({
 }) {
   return (
     <main>
-      <h2>Write new post to {board}</h2>
+      <h2>Write new post to {decodeURI(board)}</h2>
       <form action={postPost.bind(null, board)}>
         <input type="text" name="subject" />
         <textarea name="content" />
