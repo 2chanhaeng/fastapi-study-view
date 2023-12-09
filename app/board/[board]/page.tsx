@@ -1,4 +1,4 @@
-import { Board, Post } from "@/types/responce";
+import { Board, Post } from "@/types/response";
 import { notFound } from "next/navigation";
 
 interface NewPost {

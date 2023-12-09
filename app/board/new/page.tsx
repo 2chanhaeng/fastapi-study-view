@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
-import { Board } from "@/types/responce";
+import { Board } from "@/types/response";
 import { getPostInitFromForm } from "@/utils/form";
 
 export const metadata: Metadata = {

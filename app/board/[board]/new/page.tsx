@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getPostInitFromForm } from "@/utils/form";
-import { Post } from "@/types/responce";
+import { Post } from "@/types/response";
 import { revalidateTag } from "next/cache";
 
 export function generateMetadata({

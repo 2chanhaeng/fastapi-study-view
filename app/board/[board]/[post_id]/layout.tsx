@@ -1,4 +1,4 @@
-import { Post } from "@/types/responce";
+import { Post } from "@/types/response";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
