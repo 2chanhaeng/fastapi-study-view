@@ -1,5 +1,7 @@
 export default async function Boards() {
-  const boardRes = await fetch("http://127.0.0.1:8000/board/");
+  const boardRes = await fetch("http://127.0.0.1:8000/board/", {
+    next: { tags: ["board"] },
+  });
   const boards: string[] = await boardRes.json();
   return (
     <main>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getPostInitFromForm } from "@/utils/form";
 import { Post } from "@/types/responce";
+import { revalidateTag } from "next/cache";
 
 export function generateMetadata({
   params: { board },
@@ -35,5 +36,6 @@ async function postPost(board: string, formData: FormData) {
   const init = getPostInitFromForm(formData);
   const res = await fetch(`http://127.0.0.1:8000/board/${board}`, init);
   const { id } = (await res.json()) as Post;
+  revalidateTag("post");
   return redirect(`/board/${board}/${id}`);
 }

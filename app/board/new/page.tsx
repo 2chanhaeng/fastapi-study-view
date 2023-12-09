@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { Board } from "@/types/responce";
 import { getPostInitFromForm } from "@/utils/form";
@@ -26,6 +27,7 @@ async function postBoard(formData: FormData) {
   "use server";
   const init = getPostInitFromForm(formData);
   const res = await fetch(`http://127.0.0.1:8000/board/`, init);
-  const { subject: board } = (await res.json()) as { subject: string };
-  return redirect(`/board/${board}`);
+  const { subject } = (await res.json()) as Board;
+  revalidateTag("board");
+  return redirect(`/board/${encodeURI(subject)}`);
 }

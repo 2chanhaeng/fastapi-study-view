@@ -10,7 +10,9 @@ export default async function Board({
 }: {
   params: { board: string };
 }) {
-  const boardRes = await fetch(`http://127.0.0.1:8000/board/${board}/`);
+  const boardRes = await fetch(`http://127.0.0.1:8000/board/${board}/`, {
+    next: { tags: ["post"] },
+  });
   const { posts } = (await boardRes.json()) as Board;
   return (
     <ul>
