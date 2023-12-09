@@ -5,9 +5,7 @@ export function generateMetadata({
 }: {
   params: { board: string };
 }): Metadata {
-  return {
-    title: decodeURI(board),
-  };
+  return { title: decodeURI(board) };
 }
 
 export default async function BoardLayout({
@@ -20,8 +18,10 @@ export default async function BoardLayout({
   return (
     <>
       <header>
-        <a href="../">{"<"}</a>
-        <h1>{decodeURI(board)}</h1>
+        <a href="/board">Boards</a>
+        <a href={`/board/${board}`}>
+          <h1>{decodeURI(board)}</h1>
+        </a>
       </header>
       {children}
     </>
