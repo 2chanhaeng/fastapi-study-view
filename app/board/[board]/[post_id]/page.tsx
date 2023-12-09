@@ -8,11 +8,11 @@ export default async function Board({
   const postRes = await fetch(
     `http://127.0.0.1:8000/board/${board}/${post_id}`
   );
-  const post = (await postRes.json()) as Post;
+  const { subject, content } = (await postRes.json()) as Post;
   return (
     <div>
-      <h2>{post.subject}</h2>
-      <p>{post.content}</p>
+      <h2>{subject}</h2>
+      <p>{content}</p>
     </div>
   );
 }
