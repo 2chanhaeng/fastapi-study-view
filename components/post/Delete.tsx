@@ -1,12 +1,8 @@
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
+import { Post } from "@/types/request";
 
-interface DeletePostProps {
-  board: string;
-  post_id: number;
-}
-
-export function DeletePost(props: DeletePostProps) {
+export function DeletePost(props: Post) {
   return (
     <form action={destroy.bind(null, props)}>
       <button type="submit">Delete</button>
@@ -14,7 +10,7 @@ export function DeletePost(props: DeletePostProps) {
   );
 }
 
-async function destroy({ board, post_id }: DeletePostProps) {
+async function destroy({ board, post_id }: Post) {
   "use server";
   try {
     const init = { method: "DELETE" };
