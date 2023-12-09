@@ -1,4 +1,5 @@
 import { Board, Post } from "@/types/responce";
+import { notFound } from "next/navigation";
 
 interface NewPost {
   id: "new";
@@ -13,6 +14,7 @@ export default async function Board({
   const boardRes = await fetch(`http://127.0.0.1:8000/board/${board}/`, {
     next: { tags: ["post"] },
   });
+  if (!boardRes.ok) return notFound();
   const { posts } = (await boardRes.json()) as Board;
   return (
     <ul>

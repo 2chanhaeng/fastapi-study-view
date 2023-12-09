@@ -1,4 +1,5 @@
 import { Post } from "@/types/responce";
+import { notFound } from "next/navigation";
 
 export default async function Board({
   params: { board, post_id },
@@ -8,6 +9,7 @@ export default async function Board({
   const postRes = await fetch(
     `http://127.0.0.1:8000/board/${board}/${post_id}`
   );
+  if (!postRes.ok) return notFound();
   const { subject, content } = (await postRes.json()) as Post;
   return (
     <div>
