@@ -16,8 +16,10 @@ export default async function EditPost({
   params: ReqPost;
 }) {
   const prevRes = await fetch(
-    `http://127.0.0.1:8000/board/${board}/${post_id}`,
-    { next: { tags: ["post"] } }
+    `${process.env.API_URL}/board/${board}/${post_id}`,
+    {
+      next: { tags: ["post"] },
+    }
   );
   if (!prevRes.ok) return notFound();
   const { subject, content } = (await prevRes.json()) as ResPost;
@@ -38,7 +40,7 @@ async function updatePost({ board, post_id }: ReqPost, formData: FormData) {
   const init = getPostInitFromForm(formData);
   init.method = "PUT";
   const res = await fetch(
-    `http://127.0.0.1:8000/board/${board}/${post_id}`,
+    `${process.env.API_URL}/board/${board}/${post_id}`,
     init
   );
   const { id } = (await res.json()) as ResPost;

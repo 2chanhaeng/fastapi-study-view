@@ -7,7 +7,7 @@ export async function generateMetadata({
   params: { board: string; post_id: number };
 }): Promise<Metadata> {
   const postRes = await fetch(
-    `http://127.0.0.1:8000/board/${board}/${post_id}`
+    `${process.env.API_URL}/board/${board}/${post_id}`
   );
   const { subject } = (await postRes.json()) as Post;
   return { title: decodeURI(subject) };

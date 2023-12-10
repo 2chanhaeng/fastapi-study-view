@@ -26,7 +26,7 @@ export default async function NewBoard() {
 async function postBoard(formData: FormData) {
   "use server";
   const init = getPostInitFromForm(formData);
-  const res = await fetch(`http://127.0.0.1:8000/board/`, init);
+  const res = await fetch(`${process.env.API_URL}/board/`, init);
   const { subject } = (await res.json()) as Board;
   revalidateTag("board");
   return redirect(`/board/${encodeURI(subject)}`);

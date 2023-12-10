@@ -8,8 +8,10 @@ export default async function Board({
   params: { board: string; post_id: number };
 }) {
   const postRes = await fetch(
-    `http://127.0.0.1:8000/board/${board}/${post_id}`,
-    { next: { tags: ["post"] } }
+    `${process.env.API_URL}/board/${board}/${post_id}`,
+    {
+      next: { tags: ["post"] },
+    }
   );
   if (!postRes.ok) return notFound();
   const { subject, content } = (await postRes.json()) as Post;
