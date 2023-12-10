@@ -2,7 +2,6 @@ export default async function Boards() {
   const boardRes = await fetch(`${process.env.API_URL}/board`, {
     next: { tags: ["board"] },
   });
-  console.log(boardRes);
   const boards: string[] = await boardRes.json();
   return (
     <main>
